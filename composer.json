@@ -1,0 +1,22 @@
+{
+    "name": "alpifra/lucca-php",
+    "description": "A basic PHP client interracting with the Lucca RH API V3 services.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandre Chauvin",
+            "email": "dev@alexandrechauvin.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Alpifra\\LuccaPHP\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-json": "*"
+    }
+}
