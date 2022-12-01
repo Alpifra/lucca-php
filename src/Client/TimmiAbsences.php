@@ -9,7 +9,7 @@ use Alpifra\LuccaPHP\BaseClient;
  * 
  * @see https://developers.lucca.fr/docs/lucca-legacyapi/2713ebbef0217-timmi-absences-api
  */
-class TimmiAbsences extends BaseClient
+class TimmiAbsences extends BaseClient implements ClientInterface
 {
     
     /**
@@ -17,9 +17,9 @@ class TimmiAbsences extends BaseClient
      *
      * @param  int|array<array-key, int> $ownerId
      * @param  string|array<array-key, string> $date
-     * @return array<mixed>
+     * @return \stdClass
      */
-    public function list(int|array $ownerId, string|array $date = ['since', '2021-01-01']): array
+    public function list(int|array $ownerId, string|array $date = ['since', '2021-01-01']): \stdClass
     {
         $params = [
             'date' => $date,
@@ -31,15 +31,33 @@ class TimmiAbsences extends BaseClient
     }
     
     /**
-     * List all leaves requuests
+     * List all leaves requests
      *
-     * @param  int|array<array-key, int> $ownerId
-     * @param  string|array<array-key, string> $date
-     * @return array<mixed>
+     * @return \stdClass
      */
-    public function listRequests(): array
+    public function listRequests(): \stdClass
     {
-        return $this->httpRequest('GET', '/api/v3/leavesrequests');
+        return $this->httpRequest('GET', '/api/v3/leaverequests');
+    }
+    
+    /**
+     * Get one leave requests
+     *
+     * @param  int $id
+     * @return \stdClass
+     */
+    public function getRequest(int $id): \stdClass
+    {
+        return $this->httpRequest('GET', '/api/v3/leaverequests/' . $id);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getAvailableFields(): array
+    {
+        $helpResponse = $this->httpRequest('GET', '/api/v3/leaverequests/help');
+        return $helpResponse->data?->fields;
     }
 
 }

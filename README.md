@@ -18,10 +18,11 @@ composer require partikule/spothit-sms-api
 ```php
 <?php
 
-$client = new Alpifra\LuccaPHP\TimmiAbsences('***API_KEY***');
 $ownerId = 23;
 $date = ['between', '2021-01-01', '2021-01-31'];
 
+$client = new Alpifra\LuccaPHP\TimmiAbsences('***API_KEY***');
+$client->setFields('id', 'name', 'url');
 $client->list($ownerId, $date);
 ```
 
