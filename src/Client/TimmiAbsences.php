@@ -3,6 +3,7 @@
 namespace Alpifra\LuccaPHP\Client;
 
 use Alpifra\LuccaPHP\BaseClient;
+use Alpifra\LuccaPHP\Http\Request;
 
 /**
  * Timmi Absences service manager from Lucca API
@@ -27,7 +28,9 @@ class TimmiAbsences extends BaseClient implements ClientInterface
             'paging' => [$this->getPagingOffset(), $this->getPagingLimit()]
         ];
 
-        return $this->httpRequest('GET', '/api/v3/leaves', $params);
+        $params = array_merge($this->getFields(), $params);
+
+        return $this->initRequest()->get('/api/v3/leaves', $params);
     }
     
     /**
@@ -37,7 +40,7 @@ class TimmiAbsences extends BaseClient implements ClientInterface
      */
     public function listRequests(): \stdClass
     {
-        return $this->httpRequest('GET', '/api/v3/leaverequests');
+        return $this->initRequest()->get('/api/v3/leaverequests', $this->getFields());
     }
     
     /**
@@ -48,7 +51,7 @@ class TimmiAbsences extends BaseClient implements ClientInterface
      */
     public function getRequest(int $id): \stdClass
     {
-        return $this->httpRequest('GET', '/api/v3/leaverequests/' . $id);
+        return $this->initRequest()->get('/api/v3/leaverequests/' . $id, $this->getFields());
     }
     
     /**
@@ -56,7 +59,7 @@ class TimmiAbsences extends BaseClient implements ClientInterface
      */
     public function getAvailableFields(): array
     {
-        $helpResponse = $this->httpRequest('GET', '/api/v3/leaverequests/help');
+        $helpResponse = $this->initRequest()->get('/api/v3/leaves/help');
         return $helpResponse->data?->fields;
     }
 
