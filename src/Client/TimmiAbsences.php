@@ -3,7 +3,6 @@
 namespace Alpifra\LuccaPHP\Client;
 
 use Alpifra\LuccaPHP\BaseClient;
-use Alpifra\LuccaPHP\Http\Request;
 
 /**
  * Timmi Absences service manager from Lucca API
@@ -34,6 +33,17 @@ class TimmiAbsences extends BaseClient implements ClientInterface
     }
     
     /**
+     * Find a leave by id
+     *
+     * @param  string $leaveId
+     * @return \stdClass
+     */
+    public function find(string $leaveId): \stdClass
+    {
+        return $this->initRequest()->get("/api/v3/leaves/{$leaveId}");
+    }
+    
+    /**
      * List all leaves requests
      *
      * @return \stdClass
@@ -42,16 +52,16 @@ class TimmiAbsences extends BaseClient implements ClientInterface
     {
         return $this->initRequest()->get('/api/v3/leaverequests', $this->getFields());
     }
-    
+
     /**
-     * Get one leave requests
+     * Find a leave request by id
      *
-     * @param  int $id
+     * @param  int $leaveRequestId
      * @return \stdClass
      */
-    public function getRequest(int $id): \stdClass
+    public function findRequest(int $leaveRequestId): \stdClass
     {
-        return $this->initRequest()->get('/api/v3/leaverequests/' . $id, $this->getFields());
+        return $this->initRequest()->get("/api/v3/leaverequests/{$leaveRequestId}", $this->getFields());
     }
     
     /**
