@@ -72,7 +72,7 @@ class BaseClient
      * 
      * @see https://developers.lucca.fr/docs/lucca-legacyapi/a57b02f39ecaf-api-v3-conventions
      */
-    public function setFields(array $fields): self
+    public function setFields(string ...$fields): self
     {
         $this->fields = ['fields' => $fields];
         return $this;
