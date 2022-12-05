@@ -40,7 +40,7 @@ class TimmiAbsences extends BaseClient implements ClientInterface
      */
     public function find(string $leaveId): \stdClass
     {
-        return $this->initRequest()->get("/api/v3/leaves/{$leaveId}");
+        return $this->initRequest()->get("/api/v3/leaves/{$leaveId}", $this->getFields());
     }
     
     /**

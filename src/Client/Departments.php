@@ -40,7 +40,7 @@ class Departments extends BaseClient implements ClientInterface
      */
     public function find(string $departmentId): \stdClass
     {
-        return $this->initRequest()->get("/api/v3/departments/{$departmentId}");
+        return $this->initRequest()->get("/api/v3/departments/{$departmentId}", $this->getFields());
     }
 
     /**
