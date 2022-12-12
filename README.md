@@ -5,10 +5,21 @@ For more information about the API please see the [documentation](https://develo
 
 ## Installation
 
-The recommended way to install Spot-hit SMS API PHP client is through composer:
+The recommended way to install Lucca API PHP client is through this Github repository:
 
-```bash
-composer require partikule/spothit-sms-api
+```json
+    {
+        "requires": {
+            "alpifra/lucca-php": "dev-master",
+            ...
+        }
+        "repositories": [
+            {
+                "type": "vcs",
+                "url": "https://github.com/Alpifra/lucca-php.git"
+            }
+        ],
+    }
 ```
 
 ## Usage
